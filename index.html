@@ -12,6 +12,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
+          body{ cursor: url('cursor.cur'), auto;}
+            
           canvas {
               background-color: white;
               position: absolute;
@@ -24,86 +26,86 @@
         </style>
     </head>
     <body onload="animate()">
-    <h1 class="text-center">
-      <img src="dumper.png">
-    </h1>
-    <p>This is a work in progress so BEAR with us . Grrr. ;) </p>
-      <script id="background animation">
-        var colors = ["#000080","#eeaaff","#00ffff"];
-        function animate() {
-            canvasArea.start();
-            tester = new Array(10);
-            for(i =0;i<20;i++){
-              tester[i]=new component(
-                "circle",
-                50*Math.random()+30,
-                50*Math.random()+30,
-                Math.random()*window.innerWidth,
-                window.innerHeight*Math.random(),
-                colors[Math.floor(Math.random()*5)]);
+        <h1 class="text-center">
+          <img src="dumper.png">
+        </h1>
+        <p>This is a work in progress so BEAR with us . Grrr. ;) </p>
+        <script id="background animation">
+            var colors = ["#000080","#eeaaff","#00ffff"];
+            function animate() {
+                canvasArea.start();
+                tester = new Array(10);
+                for(i =0;i<20;i++){
+                  tester[i]=new component(
+                    "circle",
+                    50*Math.random()+30,
+                    50*Math.random()+30,
+                    Math.random()*window.innerWidth,
+                    window.innerHeight*Math.random(),
+                    colors[Math.floor(Math.random()*5)]);
+                }
             }
-        }
-        //Game Canvas (from w3-fools.com)
-        var canvasArea = {
-            canvas : document.createElement("canvas"),
-            start : function() {
-                this.canvas.width = window.innerWidth;
-                this.canvas.height = window.innerHeight;
-                this.context = this.canvas.getContext("2d");
-                document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-                this.interval = setInterval(updateGameArea, 1);
-            },
-            clear : function() {
-                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            //Game Canvas (from w3-fools.com)
+            var canvasArea = {
+                canvas : document.createElement("canvas"),
+                start : function() {
+                    this.canvas.width = window.innerWidth;
+                    this.canvas.height = window.innerHeight;
+                    this.context = this.canvas.getContext("2d");
+                    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                    this.interval = setInterval(updateGameArea, 1);
+                },
+                clear : function() {
+                    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                }
             }
-        }
 
-        function component(type,width, height, x, y,color) {
-          this.width = width;
-          this.height = height;
-          this.x = x;
-          this.y = y;
-          this.update = function(){
-            ctx = canvasArea.context;
-            switch(type){
-              case "image":
-                ctx.drawImage(img,this.x,this.y,this.width,this.height);
-                break;
-              case "rectangle":
-                ctx.fillStyle = color;
-                ctx.fillRect(this.x, this.y, this.width, this.height);
-                break;
-              case "circle":
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.height, 0, 2 * Math.PI, false);
-                ctx.fillStyle = color;
-                ctx.fill();
-                ctx.lineWidth = 5;
-                ctx.strokeStyle = color;
-                ctx.stroke();
-                break;
+            function component(type,width, height, x, y,color) {
+              this.width = width;
+              this.height = height;
+              this.x = x;
+              this.y = y;
+              this.update = function(){
+                ctx = canvasArea.context;
+                switch(type){
+                  case "image":
+                    ctx.drawImage(img,this.x,this.y,this.width,this.height);
+                    break;
+                  case "rectangle":
+                    ctx.fillStyle = color;
+                    ctx.fillRect(this.x, this.y, this.width, this.height);
+                    break;
+                  case "circle":
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.height, 0, 2 * Math.PI, false);
+                    ctx.fillStyle = color;
+                    ctx.fill();
+                    ctx.lineWidth = 5;
+                    ctx.strokeStyle = color;
+                    ctx.stroke();
+                    break;
+                  }
+
               }
-
-          }
-        }
-
-        function updateGameArea() {
-          canvasArea.clear();
-          tester[1].update();
-          tester[1].x = 1-300;
-
-          for(i=0;i<20;i++){
-            tester[i].update();
-            //tester[i].x+= Math.random()*.25;
-            if(tester[i].x > window.innerWidth+10){
-              tester[i].x = 1-300;
-              tester[i].y = window.innerHeight * Math.random();
             }
-          }
-        }
-        function wait(){
-          return true;
-        }
-      </script>
+
+            function updateGameArea() {
+              canvasArea.clear();
+              tester[1].update();
+              tester[1].x = 1-300;
+
+              for(i=0;i<20;i++){
+                tester[i].update();
+                //tester[i].x+= Math.random()*.25;
+                if(tester[i].x > window.innerWidth+10){
+                  tester[i].x = 1-300;
+                  tester[i].y = window.innerHeight * Math.random();
+                }
+              }
+            }
+            function wait(){
+              return true;
+            }
+        </script>
     </body>
 </html>
